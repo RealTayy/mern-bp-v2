@@ -26,16 +26,18 @@ app.use(bodyParser.urlencoded({ extended: false }));
 	RED         Server Error Codes
 	YELLOW      Client Error Codes
 	CYAN        Redirection Codes
-	UNCOLORED   Other Codes         */
+  UNCOLORED   Other Codes         */
+if (process.env.NODE_ENV !== 'production') {
   const logger = require('morgan');
   app.use(logger('dev'));
+}
 
-  /*****************|
+/*****************|
 |* SET UP ROUTES *| 
 |*****************/
 // Setup app to serve static files from React App depending on dev/prod
 if (process.env.NODE_ENV === 'production') {
-	app.use(express.static(path.join(__dirname, './client', 'build')));
+  app.use(express.static(path.join(__dirname, './client', 'build')));
 }
 
 // imports in ./routes/index.js (contains API and VIEW routes);
