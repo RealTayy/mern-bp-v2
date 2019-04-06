@@ -14,6 +14,9 @@ class App extends Component {
       exit: 500
     }
   }
+
+  setTimeout = (timeout) => this.setState({ timeout: timeout });
+
   render() {
     return <>
       <Router forceRefresh={!'pushState' in window.history}>
@@ -29,11 +32,19 @@ class App extends Component {
               <Transition
                 key={key}
                 appear={true}
-                timeout={300}
+                timeout={this.state.timeout}
               >
                 <Switch location={location}>
-                  <Route exact path="/" component={Home} />
-                  <Route exact path="/pageone" component={Contact} />
+                  <Route exact path="/" render={() => {                    
+                    return <Home
+
+                    />
+                  }} />
+                  <Route exact path="/pageone" render={() => {
+                    return <Contact
+
+                    />
+                  }} />
                   <Route exact path="/pagetwo" component={About} />
                 </Switch>
               </Transition>
