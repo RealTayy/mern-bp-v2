@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 
 export default class Home extends Component {
-  render() {    
+  render() {
+    console.log('Mounting Home and animating')
     return (
       <div>
         Home

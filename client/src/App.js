@@ -7,19 +7,25 @@ class App extends Component {
   state = {
     loadScreenFinished: false,
     pageTimeout: {
-      enter: 500,
-      exit: 500
+      enter: 2000,
+      exit: 2000
+    },
+    loadscreenTimeout: {
+      enter: 2000,
+      exit: 2000,
     }
-  }  
+  }
 
   render() {
     // Fake loading screen stuff
     if (!this.state.loadScreenFinished) setTimeout(() => {
       this.setState({ loadScreenFinished: true })
-    }, 1000);
+    }, 2000);
+    // Returns either the loading screen or 
     return <>
       {(this.state.loadScreenFinished) ? <>
-        <Router forceRefresh={!'pushState' in window.history}>
+        {/* IF THINGS BREAK IT IS PROBABLY THIS LINE BELOW WITH PUSHSTATE */}
+        <Router forceRefresh={!('pushState' in window.history)}>
           <div className="links">
             <Link to="/">Home</Link>
             <Link to="/pageone">One</Link>
@@ -69,7 +75,7 @@ class App extends Component {
       }
       < Transition
         in={!this.state.loadScreenFinished}
-        timeout={this.state.pageTimeout}
+        timeout={this.state.loadscreenTimeout}
         unmountOnExit
       >
         <LoadingScreen />
