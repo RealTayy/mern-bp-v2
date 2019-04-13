@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import { Transition } from "react-transition-group";
 import { Home, About, Contact, LoadingScreen } from './pages';
+import { Navbar } from './components'
 
 class App extends Component {
   state = {
@@ -26,11 +27,7 @@ class App extends Component {
       {(this.state.loadScreenFinished) ? <>
         {/* IF THINGS BREAK IT IS PROBABLY THIS LINE BELOW WITH PUSHSTATE */}
         <Router forceRefresh={!('pushState' in window.history)}>
-          <div className="links">
-            <Link to="/">Home</Link>
-            <Link to="/pageone">One</Link>
-            <Link to="/pagetwo">Two</Link>
-          </div>
+          <Navbar />
           <Route exact path="/" >
             {({ match }) => {
               return (

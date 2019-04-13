@@ -3,9 +3,8 @@ import './Home.scss'
 
 export default class Home extends Component {
   render() {
-    console.log('Mounting Home and animating')
     return (
-      <div id="Home">
+      <div id="Home" class="page">
         Home
       </div>
     )
