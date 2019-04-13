@@ -39,6 +39,7 @@ if (process.env.NODE_ENV !== 'production') {
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, './client', 'build')));
 }
+// app.use(express.static(path.join(__dirname, './client')));
 
 // imports in ./routes/index.js (contains API and VIEW routes);
 const routes = require("./routes");
