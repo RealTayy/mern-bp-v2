@@ -14,7 +14,12 @@ class App extends Component {
     loadscreenTimeout: {
       enter: 2000,
       exit: 2000,
-    }
+    },
+    isTransitionLocked: true
+  }
+
+  setAppState = (state) => {
+    this.setState(state)
   }
 
   render() {
@@ -22,21 +27,33 @@ class App extends Component {
     if (!this.state.loadScreenFinished) setTimeout(() => {
       this.setState({ loadScreenFinished: true })
     }, 2000);
+
+    const {
+      state,
+      setAppState,      
+    } = this;
+
     // Returns either the loading screen or 
     return <>
       {(this.state.loadScreenFinished) ? <>
         {/* IF THINGS BREAK IT IS PROBABLY THIS LINE BELOW WITH PUSHSTATE */}
         <Router forceRefresh={!('pushState' in window.history)}>
-          <Navbar />
+          <Navbar
+            isTransitionLocked={state.isTransitionLocked}
+            setAppState={setAppState}
+          />
           <Route exact path="/" >
             {({ match }) => {
               return (
                 <Transition
                   in={match != null}
-                  timeout={this.state.pageTimeout}
+                  timeout={state.pageTimeout}
                   unmountOnExit
                 >
-                  <Home />
+                  <Home
+                    isTransitionLocked={state.isTransitionLocked}
+                    setAppState={setAppState}
+                  />
                 </Transition>
               )
             }}
@@ -46,10 +63,13 @@ class App extends Component {
               return (
                 <Transition
                   in={match != null}
-                  timeout={this.state.pageTimeout}
+                  timeout={state.pageTimeout}
                   unmountOnExit
                 >
-                  <Contact />
+                  <Contact
+                    isTransitionLocked={state.isTransitionLocked}
+                    setAppState={setAppState}
+                  />
                 </Transition>
               )
             }}
@@ -59,10 +79,13 @@ class App extends Component {
               return (
                 <Transition
                   in={match != null}
-                  timeout={this.state.pageTimeout}
+                  timeout={state.pageTimeout}
                   unmountOnExit
                 >
-                  <About />
+                  <About
+                    isTransitionLocked={state.isTransitionLocked}
+                    setAppState={setAppState}
+                  />
                 </Transition>
               )
             }}
@@ -71,8 +94,8 @@ class App extends Component {
       </> : ''
       }
       < Transition
-        in={!this.state.loadScreenFinished}
-        timeout={this.state.loadscreenTimeout}
+        in={!state.loadScreenFinished}
+        timeout={state.loadscreenTimeout}
         unmountOnExit
       >
         <LoadingScreen />
