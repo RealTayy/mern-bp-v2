@@ -1,24 +1,19 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 
-export class Navbar extends Component {
+export default function Navbar(props) {
+  const { isTransitionLocked, setIsTransitionLocked } = props
 
-  handleClick = (e) => {
-    if(this.props.isTransitionLocked) e.preventDefault();
-    this.props.setAppState({
-      isTransitionLocked: true
-    })
+  const handleClick = (e) => {
+    console.log(isTransitionLocked);
+    if (isTransitionLocked) e.preventDefault();
   }
 
-  render() {
-    return (
-      <div className="Navbar">
-        <Link onClick={this.handleClick} to="/">Home</Link>
-        <Link onClick={this.handleClick} to="/pageone">One</Link>
-        <Link onClick={this.handleClick} to="/pagetwo">Two</Link>
-      </div>
-    )
-  }
+  return (
+    <div className="Navbar">
+      <Link onClick={handleClick} to="/">Home</Link>
+      <Link onClick={handleClick} to="/pageone">One</Link>
+      <Link onClick={handleClick} to="/pagetwo">Two</Link>
+    </div>
+  )
 }
-
-export default Navbar
