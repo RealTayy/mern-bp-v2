@@ -12,7 +12,7 @@ function App() {
     [loadScreenTimeout, setLoadScreenTimeout] = useState({ enter: 2000, exit: 2000 }),
     [isTransitionLocked, setIsTransitionLocked] = useState(true);
 
-  // Fake loading screen stuff
+  // Fake loading screen stuff -- This is where the animation would go with a callback that sas HEY IM DONE LOADING! (aka the two lines below)
   if (!loadScreenFinished) setTimeout(() => {
     setLoadScreenFinished(true);
     setIsTransitionLocked(false);
