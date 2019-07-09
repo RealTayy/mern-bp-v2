@@ -1,20 +1,23 @@
-import React, { Component } from 'react'
+import React, { useContext, useEffect } from 'react'
+import { Store } from '../../Store'
 
-export default class Contact extends Component {
-  componentDidMount() {
-    // Sets App's isTransitioning to false so you can transition to another page
-      this.props.setIsTransitionLocked(true)
-  }
-  
-  componentWillUnmount() {
-      this.props.setIsTransitionLocked(false)
-  }
+export default function Contact() {
+  // Subscribe to the closest parent component which uses `React.createContext`
+  const { dispatch } = useContext(Store);
+  // The above line is the same as:
+  // const store = useContext(Store)
+  // const dispatch = store.dispatch
 
-  render() {
-    return (
-      <div id="Contact" className="page">
-        Contact
-      </div>
-    )
-  }
+  useEffect(() => {
+    dispatch({
+      type: 'SET_ACTIVE_PAGE',
+      payload: 'Contact'
+    })
+  }, [dispatch])
+
+  return (
+    <div id="_Contact" className="_Contact page">
+      Contact
+    </div>
+  )
 }
