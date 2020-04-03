@@ -44,7 +44,6 @@ if (process.env.NODE_ENV === "production") {
 
 // imports in ./routes/index.js (contains API and VIEW routes);
 const routes = require("./routes");
-// Sets express to use routes
 app.use(routes);
 
 /*********************************|
